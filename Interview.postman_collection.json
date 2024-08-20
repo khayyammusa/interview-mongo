@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "65c29e13-4183-4c83-bc77-df18e4f2adc3",
+		"name": "Interview",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4461573"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse( responseBody ); \r",
+							"\r",
+							"postman.setEnvironmentVariable( \"jwt-token\" , jsonData );"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user@example.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Google Distance Calculator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://maps.googleapis.com/maps/api/directions/json?origin=Berlin,10115,DE&destination=Hamburg,20095,DE&key=AIzaSyA_z4H4vBv0Mn8og2T4c2_iWqJrfiLAIqY",
+					"protocol": "https",
+					"host": [
+						"maps",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"directions",
+						"json"
+					],
+					"query": [
+						{
+							"key": "origin",
+							"value": "Berlin,10115,DE"
+						},
+						{
+							"key": "destination",
+							"value": "Hamburg,20095,DE"
+						},
+						{
+							"key": "key",
+							"value": "AIzaSyA_z4H4vBv0Mn8og2T4c2_iWqJrfiLAIqY"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calculate prices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"addresses\": [\r\n        {\r\n            \"country\": \"DE\",\r\n            \"zip\": \"10115\",\r\n            \"city\": \"Berlin\"\r\n        },\r\n        {\r\n            \"country\": \"DE\",\r\n            \"zip\": \"20095\",\r\n            \"city\": \"Hamburg\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/transport/calculate-prices",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"transport",
+						"calculate-prices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/logout",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
